@@ -5,10 +5,14 @@ import handleSubmit from './handles/handlesubmit';
 import { useRef } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import HomePage from './pages/Home';
+import UserPage from './pages/User';
+import CalendarPage from './pages/Calendar';
+import SeriesPage from './pages/Series';
+import SeriePage from './pages/Serie';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -18,9 +22,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-console.log(firebaseConfig)
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 export const firestore = getFirestore(app);
@@ -42,25 +43,17 @@ function App() {
 
   getUsers(firestore).then((data) => console.log(data))
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <form onSubmit={submithandler}>
-        <input type= "text" ref={dataRef} />
-        <button type = "submit">Save</button>
-      </form>
+    <div className="App-header">
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/user/:userId" element={<UserPage />} />
+        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/series/:page" element={<SeriesPage />} />
+        <Route path="/series/:genre/:page" element={<SeriesPage />} />
+        <Route path="/series/search/:query/:page" element={<SeriesPage />} />
+        <Route path="/serie/:serieId" element={<SeriePage />} />
+      </Routes>
     </div>
   );
 }
