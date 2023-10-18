@@ -52,11 +52,11 @@ function Register() {
     const hash = bcrypt.hashSync(password, salt);
     let exist = await getOneUser(firestore, email);
 
-    if (exist.length > 0) {
+    if (exist.user) {
       alert("User already exist");
       return false;
     }
-    if (exist.length === 0) {
+    if (exist.user === null) {
       alert("User created");
     }
 
