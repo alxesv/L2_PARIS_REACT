@@ -29,21 +29,6 @@ const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 
 function App() {
-  const dataRef : any = useRef()
- 
-  const submithandler = (e : any) => {
-    e.preventDefault()
-    handleSubmit(dataRef.current.value)
-    dataRef.current.value = ""
-  }
-  async function getUsers(db : any){
-    const usersCol = collection(db, 'users');
-    const userSnapshot = await getDocs(usersCol);
-  const userList = userSnapshot.docs.map(doc => doc.data());
-  return userList;
-  }
-
-  getUsers(firestore).then((data) => console.log(data))
   return (
     <div className="App-header">
       <Header />
