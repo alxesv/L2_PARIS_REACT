@@ -4,11 +4,11 @@ a {
 }
 
 .navbar, .tabs {
+  background-color: #1a1a18;
   display: flex;
   justify-content: space-between;
   a {
     color: white;
-    font-size: 1.2rem;
     font-weight: bold;
     padding: 1rem;
     &:hover{
@@ -21,18 +21,24 @@ a {
 }
 
 .navtab {
-  background-color: #474339;
   &:has(.active){
     background-color: #2b2924;
   }
 }
 
 .logo {
+  align-self: center;
   justify-content: flex-start;
 }
 
 .userZone {
+  align-self: center;
   justify-content: flex-end;
+}
+
+.searchBar {
+  height: fit-content;
+  align-self: center;
 }
 
 .container h1 {
