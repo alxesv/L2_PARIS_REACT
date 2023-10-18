@@ -54,6 +54,9 @@ a {
     margin-right: 0.3rem;
     color: white;
   }
+  button:hover {
+    color: #fbd461;
+  }
 }
 .container {
   padding: 3rem;
@@ -128,6 +131,6 @@ a {
   font-size: 1.5rem;
 }
 
-.genreSelect, .sortSelect {
+.genreSelect, .sortSelect, .infoList {
   margin-left: 1rem;
 }

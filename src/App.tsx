@@ -39,6 +39,7 @@ function App() {
         <Route path="/series/:page" element={<SeriesPage />} />
         <Route path="/series/:genre/:page" element={<SeriesPage />} />
         <Route path="/series/search/:query/:page" element={<SeriesPage />} />
+        <Route path="series/search/:genre/:query/:page" element={<SeriesPage />} />
         <Route path="/serie/:serieId" element={<SeriePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/followed" element={<FollowPage />} />
