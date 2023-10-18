@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import logout from '../functions/logout';
 
 function Header(){
@@ -61,12 +63,14 @@ function Header(){
                         <Link className={active === 'calendar' ? 'active' : ''} to="/calendar">Calendar</Link>
                     </div>
                     <div className='navtab'>
-                        <Link className={active === 'user' ? 'active' : ''} to="/user/1">Profil</Link>
+                        <Link className={active === 'profile' ? 'active' : ''} to="/profile">Profil</Link>
                     </div>
                 </div>
                 <div className='searchBar'>
                     <input type="text" placeholder="Rechercher une série" />
-                    <button type="submit">Rechercher</button>
+                    <button className='btn-reset' type="submit">
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
                 </div>
                 <div className='userZone'>
                     <div className='navtab'>

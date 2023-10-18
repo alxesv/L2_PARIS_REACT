@@ -49,7 +49,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/user/:userId" element={<UserPage />} />
+        <Route path="/profile" element={<UserPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/series/:page" element={<SeriesPage />} />
         <Route path="/series/:genre/:page" element={<SeriesPage />} />
