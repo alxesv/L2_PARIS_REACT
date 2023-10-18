@@ -5,11 +5,21 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import logout from '../functions/logout';
+import { useNavigate } from 'react-router-dom';
 
 function Header(){
     const location = useLocation();
     const page = location.pathname.split('/')[1];
     const [active, setActive] = useState(page);
+    const navigate = useNavigate();
+
+    function searchSerie(){
+        const query = document.getElementById('serieSrch') as HTMLInputElement;
+        const endQuery = query.value.trim();
+        if(endQuery !== '') {
+        navigate('/series/search/' + endQuery + '/1');
+        }
+    }
 
     useEffect(() => {
         setActive(page)
@@ -38,8 +48,8 @@ function Header(){
                     </div>
                 </div>
                 <div className='searchBar'>
-                    <input type="text" placeholder="Rechercher une série" />
-                    <button className='btn-reset' type="submit">
+                    <input type="text" id="serieSrch" placeholder="Rechercher une série" onKeyUp={(e) => {if(e.key === 'Enter'){searchSerie()}}} />
+                    <button className='btn-reset' type="submit" onClick={searchSerie}>
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
