@@ -13,6 +13,7 @@ import CalendarPage from './pages/Calendar';
 import SeriesPage from './pages/Series';
 import SeriePage from './pages/Serie';
 import Register from './components/Register';
+import FollowPage from './pages/Follow';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -55,6 +56,7 @@ function App() {
         <Route path="/series/search/:query/:page" element={<SeriesPage />} />
         <Route path="/serie/:serieId" element={<SeriePage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/followed" element={<FollowPage />} />
       </Routes>
     </div>
   );

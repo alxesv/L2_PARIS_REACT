@@ -52,14 +52,21 @@ function Header(){
                         <Link className={active === '' ? 'active' : ''} to="/">Accueil</Link>
                     </div>
                     <div className='navtab'>
-                        <Link className={active === 'user' ? 'active' : ''} to="/user/1">Profil</Link>
+                        <Link className={(active === 'series' || active === 'serie') ? 'active' : ''} to="/series/1">Séries</Link>
+                    </div>
+                    <div className='navtab'>
+                        <Link className={active === 'followed' ? 'active' : ''} to="/followed">Suivies</Link>
                     </div>
                     <div className='navtab'>
                         <Link className={active === 'calendar' ? 'active' : ''} to="/calendar">Calendar</Link>
                     </div>
                     <div className='navtab'>
-                        <Link className={(active === 'series' || active === 'serie') ? 'active' : ''} to="/series/1">Séries</Link>
+                        <Link className={active === 'user' ? 'active' : ''} to="/user/1">Profil</Link>
                     </div>
+                </div>
+                <div className='searchBar'>
+                    <input type="text" placeholder="Rechercher une série" />
+                    <button type="submit">Rechercher</button>
                 </div>
                 <div className='userZone'>
                     <div className='navtab'>
