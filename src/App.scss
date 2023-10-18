@@ -20,7 +20,7 @@ a {
 }
 
 .navtab {
-  &:has(.active) a{
+  &:has(.active) a.active{
     color: #fbd461;
   }
 }
