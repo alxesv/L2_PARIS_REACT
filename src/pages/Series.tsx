@@ -13,32 +13,97 @@ function SeriesPage(){
 
     const navigate = useNavigate();
 
+    const [genres, setGenres] = useState<any[]>([]);
     const [series, setSeries] = useState<any[]>([]);
+
+    const [sort, setSort] = useState<string>('popularity.desc');
+
     const { page, genre, query } = useParams<{ page: string, genre: string, query: string }>();
 
-    const fetchSeries = async () => {
-        const res = await fetch(`${BASE_URL}/tv/popular?api_key=${TMDB_API_KEY}&language=fr-FR&page=${page}`);
+    async function fetchSeries () {
+        const res = await fetch(`${BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&language=fr-FR&page=${page}&sort_by=${sort}`);
         const data = await res.json();
         setSeries(data.results);
     }
 
-    useEffect(() => {
-        fetchSeries();
-    }, [page]);
+    async function fetchSeriesByGenre () {
+        const res = await fetch(`${BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&language=fr-FR&page=${page}&with_genres=${genre}&sort_by=${sort}`);
+        const data = await res.json();
+        setSeries(data.results);
+    }
 
+    async function getGenres(){
+        const res = await fetch(`${BASE_URL}/genre/tv/list?api_key=${TMDB_API_KEY}&language=fr-FR&`);
+        const data = await res.json();
+        return data.genres;
+    }
+
+    function gotoGenre(genreId : string){
+        if(genreId){
+            navigate('/series/' + genreId + '/1');
+        }
+        else{
+            navigate('/series/1');
+        }
+    }
+
+    useEffect(() => {
+        try {
+            getGenres().then((genres) => {
+                setGenres(genres);
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }, []);
+
+    useEffect(() => {
+        try {
+            if(genre){
+                fetchSeriesByGenre();
+            }
+            else{
+                fetchSeries();
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }, [page, genre, sort]);
 
     return(
         <div className='container'>
             <h1>Series</h1>
 
+            <select className='genreSelect' onChange={(e) => gotoGenre(e.target.value)}>
+            <option value="">Tous les genres</option>
+            {genres.map((g, index) => (
+                <option selected={g.id==genre} key={index} value={g.id}>{g.name}</option>
+            ))}
+            </select>
+            <div className='sortSelect'>
+            <label>Trier par : </label>
+            <select onChange={(e) => setSort(e.target.value)}>
+                <option value="popularity.desc">Popularité</option>
+                <option value="vote_average.desc">Note</option>
+                <option value="first_air_date.desc">Date de sortie</option>
+            </select>
+            </div>
             <ul className="serieList">
-                {series.map((serie, index) => (
+                {series?.map((serie, index) => (
                 <li key={index}><Serie data={serie} /></li>
                 ))}
             </ul>
+
+            {!series &&
+             <>
+            <div>Aucune série trouvée</div>
+            <button onClick={() => navigate(-1)}><FontAwesomeIcon className='App-link' icon={faBackspace}/> Retour</button>
+            </>
+            }
             
-        {series.length > 0 && <Pagination page={page} />}
-        {series.length === 0 && <button onClick={() => navigate(-1)}><FontAwesomeIcon className='App-link' icon={faBackspace}/> Retour</button>}
+        {series && <Pagination page={page} />}
         </div>
     )
 }
