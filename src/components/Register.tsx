@@ -73,35 +73,35 @@ function Register() {
     <div className="registerBody">
       <h1>Register</h1>
 
-      <form onSubmit={(e) => handleSubmit(e)} className="form">
-        <label className="label">Username :</label>
+      <form onSubmit={(e) => handleSubmit(e)} className="registerForm">
+        <label className="registerLabel">Username :</label>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           type="text"
           name="username"
           required
-          className="input"
+          className="registerInput"
         />
 
-        <label className="label">Email :</label>
+        <label className="registerLabel">Email :</label>
         <input
           type="email"
           name="email"
           required
           onChange={(e) => setEmail(e.target.value)}
           value={email}
-          className="input"
+          className="registerInput"
         />
 
-        <label className="label">Password :</label>
+        <label className="registerLabel">Password :</label>
         <input
           type="password"
           name="password"
           required
           onChange={(e) => setPassword(e.target.value)}
           value={password}
-          className="input"
+          className="registerInput"
         />
 
         <button type="submit" className="button-54">
