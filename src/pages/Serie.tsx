@@ -30,9 +30,9 @@ function ShowPage(){
         <div className="container">
         <button onClick={() => navigate(-1)}><FontAwesomeIcon  className="App-link" icon={faBackspace}/> Retour</button>
         <h1>{show.name}</h1>
-            <div className="moviePage">
+            <div className="seriePage">
                 <img src={"https://image.tmdb.org/t/p/w400/" + show.poster_path} />
-                <div className="movieDetail">
+                <div className="serieDetail">
                     <div>{show.overview}</div>
                     <div>Date de sortie : {show.first_air_date}</div>
                     <div>Votes : {show.vote_average} <FontAwesomeIcon icon={faStar}/></div>
