@@ -6,7 +6,7 @@ import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 
-function ShowPage(){
+function SeriePage(){
     const TMDB_API_KEY= process.env.REACT_APP_TMDB_API_KEY
     const BASE_URL = "https://api.themoviedb.org/3"
 
@@ -23,8 +23,7 @@ function ShowPage(){
         }
         fetchShow();
     }, [])
-
-    console.log(show)
+    
     return(
 
         <div className="container">
@@ -42,4 +41,4 @@ function ShowPage(){
     )
 }
 
-export default ShowPage;
+export default SeriePage;
