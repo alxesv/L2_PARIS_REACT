@@ -2,21 +2,33 @@ import React, { useEffect, useState } from "react";
 import "../assets/login.scss";
 import { firestore } from "../App";
 import { getOneUser } from "../functions/getOneUser";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const bcrypt = require("bcryptjs");
 
-  useEffect(() => {
+  /* useEffect(() => {
     toast("Hello world!")
-  }, []);
+  }, []); */
 
   function handleSubmit(e: any) {
     e.preventDefault();
+
+    const current = toast.success("Login successful !", {
+      position: "top-center",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      autoClose: 5000,
+    });
+
+    return;
 
     let result = login(firestore);
 
@@ -32,7 +44,17 @@ export default function Login() {
     let exist = await getOneUser(firestore, email);
 
     if (exist.user && bcrypt.compareSync(password, exist.user.password)) {
-      alert("User logged in");
+      const current = toast.success("", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        autoClose: 5000,
+      });
+
       localStorage.setItem("userId", exist.id);
       window.location.href = "/";
     }
@@ -44,18 +66,7 @@ export default function Login() {
 
   return (
     <div className="loginBody">
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <ToastContainer />
       <h1>Login</h1>
 
       <form onSubmit={(e) => handleSubmit(e)} className="loginForm">
