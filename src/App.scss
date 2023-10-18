@@ -31,8 +31,9 @@ a {
 }
 
 .userZone {
-  align-self: center;
+  display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .searchBar {
