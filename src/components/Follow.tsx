@@ -37,9 +37,10 @@ function Follow() {
     fetchData();
   }, []); 
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchSeriesForFollows();
   }, [follows])
+
   return (
     <div className='container'>
       <ul className="serieList">

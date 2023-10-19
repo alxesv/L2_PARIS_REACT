@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { faStar, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore } from "../App";
 import { addFollow } from '../functions/addFollow'
+import { inFollows } from '../functions/inFollows'
 
 function Series(props : any){
 
     const user = localStorage.getItem('userId');
+    const [isFollowed, setIsFollowed] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            inFollows(firestore, user, props.data.id)
+                .then(result => {
+                    setIsFollowed(result);
+                });
+        }
+    }, [])
 
     return(
         <div className="serie">
@@ -18,8 +29,8 @@ function Series(props : any){
             </Link>
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
         {
-            user == user_id && props.data.id == serie_id ? (
-                <button className="followSerie" onClick={() => deleteFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faMinus}/></button>
+            isFollowed ? (
+                <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faMinus}/></button>
             ) : (
                 <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faPlus}/></button>
             )
