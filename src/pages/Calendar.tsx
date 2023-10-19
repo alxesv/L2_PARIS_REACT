@@ -3,21 +3,17 @@ import '../assets/calendar.scss'
 import { firestore } from "../App";
 import { collection, query, where, getDocs } from 'firebase/firestore/lite';
 import CalendarItem from '../components/CalendarItem';
+import { getUserId } from '../functions/getUserId';
 
 
 function CalendarPage(){
     const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
     const BASE_URL = 'https://api.themoviedb.org/3';
 
-    const user_id  : string = 'LdGVICQ2rQgWOs9xiRT4';
+    const user_id  : any = getUserId();
 
 
-    let followList : string[] = [
-        /*"84958",
-        "81329",
-        "157065",
-        "72710"*/
-    ];
+    let followList : string[] = [];
     const [episodes, setEpisodes] = useState<any[]>([]);
 
     const currentDate : Date = new Date();
