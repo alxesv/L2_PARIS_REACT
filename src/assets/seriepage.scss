@@ -1,0 +1,65 @@
+.backdrop {
+    min-height: 720px;
+    background: center / cover no-repeat;
+    position: relative;
+    h1 {
+        background-color: #1a1a18;
+    }
+}
+
+.serieDetail {
+    margin-top: 2rem;
+    div {
+        margin-top: 1rem;
+    }
+    .genre {
+        &:hover {
+            color: #fbd461;
+        }
+    }
+}
+
+.seasons {
+    margin-top: 1rem;
+}
+
+.season {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    .rating {
+        position: inherit;
+        margin-left: 0.5rem;
+    }
+    h3{
+        display: inline-block;
+    }
+    .date {
+        font-size: 0.8rem;
+    }
+}
+
+.episode {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    h4 {
+        margin: 0;
+    }
+    .rating {
+        position: absolute;
+        background-color: #1a1a18;
+    }
+    .episodeHeader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.episodes {
+    overflow: scroll;
+    margin-top: 1rem;
+    display: flex;
+}
