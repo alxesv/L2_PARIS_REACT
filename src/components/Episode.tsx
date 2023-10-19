@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../assets/seriepage.scss';
 
 function Episode(props : any){
-    console.log(props.data)
 
     return(
         <div className="episode">
