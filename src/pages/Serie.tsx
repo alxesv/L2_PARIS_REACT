@@ -15,12 +15,13 @@ function SeriePage(){
     const [show, setShow] = useState<any>([])
     let { serieId } = useParams();
 
+    async function fetchShow(){
+        const res = await fetch(`${BASE_URL}/tv/${serieId}?api_key=${TMDB_API_KEY}&language=fr-FR`);
+        const data = await res.json();
+        setShow(data);
+    }
+
     useEffect(() => {
-        async function fetchShow(){
-            const res = await fetch(`${BASE_URL}/tv/${serieId}?api_key=${TMDB_API_KEY}&language=fr-FR`);
-            const data = await res.json();
-            setShow(data);
-        }
         fetchShow();
     }, [])
     
@@ -30,7 +31,7 @@ function SeriePage(){
         <button onClick={() => navigate(-1)}><FontAwesomeIcon  className="App-link" icon={faBackspace}/> Retour</button>
         <h1>{show.name}</h1>
             <div className="seriePage">
-                <img src={"https://image.tmdb.org/t/p/w400/" + show.poster_path} />
+                <img src={"https://image.tmdb.org/t/p/w400" + show.poster_path} />
                 <div className="serieDetail">
                     <div>{show.overview}</div>
                     <div>Date de sortie : {show.first_air_date}</div>
