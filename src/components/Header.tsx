@@ -46,7 +46,7 @@ function Header(){
                 <div className='userZone'>
                     {!localStorage.getItem("userId") ? <div className='navtab'>
                         <Link className={active === 'register' ? 'active' : ''} to="/register">Register</Link>
-                        /
+                        |
                         <Link className={active === 'login' ? 'active' : ''} to="/login">Login</Link>
                     </div> : 
                     <div className='navtab'>

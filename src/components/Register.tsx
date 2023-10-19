@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "../assets/register.scss";
 import { firestore } from "../App";
-import {
-  collection,
-  addDoc,
-} from "firebase/firestore/lite";
+import { collection, addDoc } from "firebase/firestore/lite";
 import { getOneUser } from "../functions/getOneUser";
 import { hasWhiteSpace } from "../functions/hasWhiteSpace";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -27,13 +27,35 @@ function Register() {
       "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
     );
     if(hasWhiteSpace(username)){
-      alert("Username must not contain any spaces");
+      //alert("Username must not contain any spaces");
+      toast.warning("Username must not contain any spaces", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        autoClose: 3000,
+      });
+      
       return;
     }
     if (!check.test(password) || hasWhiteSpace(password)) {
-      alert(
-        "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character and no spaces"
-      );
+      //alert(
+      //  "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character and no spaces"
+      //);
+      toast.warning("Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character and no spaces", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        autoClose: 3000,
+      });
+      
       return;
     } */
 
@@ -45,19 +67,39 @@ function Register() {
     setUsername("");
     setEmail("");
     setPassword("");
-    navigate("/");
+
+    toast.success("User created !", {
+      position: "top-center",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      autoClose: 3000,
+    });
+
+    setTimeout(() => {
+      navigate("/");
+    }, 4000);
   }
-  
+
   async function register(db: any) {
     const hash = bcrypt.hashSync(password, salt);
     let exist = await getOneUser(firestore, email);
 
     if (exist.user) {
-      alert("User already exist");
+      toast.error("User already exist", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        autoClose: 3000,
+      });
       return false;
-    }
-    if (exist.user === null) {
-      alert("User created");
     }
 
     const { id } = await addDoc(collection(db, "users"), {
@@ -71,6 +113,7 @@ function Register() {
 
   return (
     <div className="registerBody">
+      <ToastContainer />
       <h1>Register</h1>
 
       <form onSubmit={(e) => handleSubmit(e)} className="registerForm">
@@ -104,9 +147,13 @@ function Register() {
           className="registerInput"
         />
 
-        <button type="submit" className="button-54">
+        <button type="submit" className="button-54 registerButton">
           Register
         </button>
+
+        <Link className="button-54" to="/login">
+          login ?
+        </Link>
       </form>
     </div>
   );

@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../assets/login.scss";
 import { firestore } from "../App";
 import { getOneUser } from "../functions/getOneUser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const bcrypt = require("bcryptjs");
-
-  /* useEffect(() => {
-    toast("Hello world!")
-  }, []); */
+  const navigate = useNavigate();
 
   function handleSubmit(e: any) {
     e.preventDefault();
-
-    const current = toast.success("Login successful !", {
-      position: "top-center",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      autoClose: 5000,
-    });
-
-    return;
 
     let result = login(firestore);
 
@@ -44,7 +30,7 @@ export default function Login() {
     let exist = await getOneUser(firestore, email);
 
     if (exist.user && bcrypt.compareSync(password, exist.user.password)) {
-      const current = toast.success("", {
+      toast.success("Login successful !", {
         position: "top-center",
         hideProgressBar: false,
         closeOnClick: true,
@@ -52,14 +38,38 @@ export default function Login() {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        autoClose: 5000,
+        autoClose: 3000,
       });
 
       localStorage.setItem("userId", exist.id);
-      window.location.href = "/";
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
     }
+
     if (!exist.user) {
-      alert("User doesn't exist");
+      toast.error("User doesn't exist", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        autoClose: 3000,
+      });
+      return false;
+    } else if (!bcrypt.compareSync(password, exist.user.password)) {
+      toast.warning("Wrong password", {
+        position: "top-center",
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        autoClose: 3000,
+      });
       return false;
     }
   }
@@ -90,9 +100,13 @@ export default function Login() {
           className="loginInput"
         />
 
-        <button type="submit" className="button-53">
+        <button type="submit" className="button-53 loginButton">
           Login
         </button>
+
+        <Link className="button-53" to="/register">
+          Register ?
+        </Link>
       </form>
     </div>
   );
