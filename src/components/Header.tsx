@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import logout from '../functions/logout';
 import { useNavigate } from 'react-router-dom';
+import logo from '../ressources/logo.png';
 
 function Header(){
     const location = useLocation();
@@ -29,7 +30,9 @@ function Header(){
     return(
         <header>
             <nav className='navbar'>
-                <div className='logo'>placeholder</div>
+                <div className='logo'>
+                    <img src={logo} alt="logo" />
+                </div>
                 <div className='tabs'>
                     <div className='navtab'>
                         <Link className={active === '' ? 'active' : ''} to="/">Accueil</Link>
