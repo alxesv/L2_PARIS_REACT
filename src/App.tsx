@@ -43,7 +43,6 @@ function App() {
   return userList;
   }
 
-  getUsers(firestore).then((data) => console.log(data))
   return (
     <div className="App-header">
       <Header />
