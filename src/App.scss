@@ -146,6 +146,20 @@ a {
   margin-left: 1rem;
 }
 
+.followSerie {
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: 90%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color:white;
+}
+
+.followSerie:hover {
+  color: #fbd461;
+  
 .btn-back {
   position: absolute;
 }
