@@ -43,7 +43,6 @@ function App() {
     const userList = userSnapshot.docs.map((doc) => doc.data());
     return userList;
   }
-
   return (
     <div className="App-header">
       <Header />
@@ -55,6 +54,7 @@ function App() {
         <Route path="/series/:page" element={<SeriesPage />} />
         <Route path="/series/:genre/:page" element={<SeriesPage />} />
         <Route path="/series/search/:query/:page" element={<SeriesPage />} />
+        <Route path="series/search/:genre/:query/:page" element={<SeriesPage />} />
         <Route path="/serie/:serieId" element={<SeriePage />} />
 
         <Route path="/followed" element={<FollowPage />} />

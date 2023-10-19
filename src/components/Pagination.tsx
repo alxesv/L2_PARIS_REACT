@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 function Pagination(props : any){
     const { page } = props;
-    const maxPage = 500;
+    const { maxPage } = props;
     const location = useLocation();
     const navigate = useNavigate();
     const maxDisplayPages = 10;
