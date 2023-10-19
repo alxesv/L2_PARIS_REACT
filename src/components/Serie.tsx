@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore } from "../App";
 import { addFollow } from '../functions/addFollow'
 import { inFollows } from '../functions/inFollows'
+import { deleteFollow } from "../functions/deleteFollow";
 
 function Series(props : any){
 
@@ -28,13 +29,13 @@ function Series(props : any){
                 <h4>{props.data.name}</h4>
             </Link>
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
-        {
-            isFollowed ? (
-                <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faMinus}/></button>
-            ) : (
-                <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faPlus}/></button>
-            )
-        }
+            {user ? (
+                isFollowed ? (
+                    <button className="followSerie" onClick={() => deleteFollow(firestore, user, props.data.id)}><FontAwesomeIcon icon={faMinus}/></button>
+                ) : (
+                    <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faPlus}/></button>
+                )
+            ) : null}
         </div>
     )
 }
