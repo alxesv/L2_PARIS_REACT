@@ -1,0 +1,77 @@
+.comment-container {
+    background-color: #1a1a18;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  #commentaire {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Style text area comm */
+.comment-input-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  /* Style pour la note */
+  .select-container {
+    display: inline-block;
+  }
+  select {
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  /* Style bouton add com */
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style pour le bouton "Ajouter un commentaire" au survol */
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Style pour les étoiles d'évaluation */
+.star-rating {
+    font-size: 24px; 
+    color: #ffd700; 
+    display: inline-block;
+  }
+  .star-rating::before {
+    content: '★'; 
+    padding: 0 2px; 
+  }
+  
+/* Style pour le champ de texte du commentaire */
+.comment-input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  .comment-rating-select {
+    width: 50%;
+    margin-top: 10px; /* Espace entre le champ de texte et le sélecteur */
+  }
+  

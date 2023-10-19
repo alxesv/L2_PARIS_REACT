@@ -2,8 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { collection, addDoc } from 'firebase/firestore/lite';
 import { firestore } from '../App';
 import { getDocs } from 'firebase/firestore/lite';
-import "../assets/Comment.scss";
-
+import '../assets/Comment.scss';
 
 interface Comment {
   id: string;
@@ -23,9 +22,8 @@ const Comment: React.FC<CommentProps> = ({ serieId }) => {
   useEffect(() => {
     const getComments = async () => {
       const commentRef = collection(firestore, 'series', serieId, 'comments');
-      
       const commentSnapshot = await getDocs(commentRef);
-      
+
       const commentList: Comment[] = commentSnapshot.docs.map((doc) => doc.data() as Comment);
       setComments(commentList);
     };
@@ -63,23 +61,30 @@ const Comment: React.FC<CommentProps> = ({ serieId }) => {
 
   return (
     <div>
-      <h2>Commentaires</h2>
+      <div id="commentaire">
+        <p>Commentaires</p>
+      </div>
       <div>
-        <select value={rating} onChange={handleRatingChange}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <textarea value={comment} onChange={handleCommentChange} rows={4} cols={50} />
-        <button onClick={handleSubmitComment}>Ajouter un commentaire</button>
+        <div className="comment-input-container">
+          <textarea value={comment} onChange={handleCommentChange} rows={4} cols={25} className="comment-input" />
+        </div>
+        <div className="select-container">
+          <select value={rating} onChange={handleRatingChange}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
       </div>
       <div>
         {comments.map((c, index) => (
           <div key={index}>
-            <p>Évaluation : {c.rating}</p>
-            <p>Commentaire : {c.comment}</p>
+            <p>
+              <span className="star-rating">{c.rating}</span>
+              Commentaire : {c.comment}
+            </p>
           </div>
         ))}
       </div>
