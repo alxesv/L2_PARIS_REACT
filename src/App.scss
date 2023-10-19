@@ -69,7 +69,7 @@ a {
 .App-header {
   background-color: #1a1a18;
   min-height: 100vh;
-  font-size: calc(10px + 2vmin);
+  font-size: 1rem;
   color: white;
 }
 
@@ -136,4 +136,8 @@ a {
 
 .genreSelect, .sortSelect, .infoList {
   margin-left: 1rem;
+}
+
+.btn-back {
+  position: absolute;
 }
