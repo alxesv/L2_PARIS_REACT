@@ -9,6 +9,7 @@ a {
 
 .navbar, .tabs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   a {
     color: white;
@@ -21,6 +22,7 @@ a {
   >div:not(.tabs){
     display: flex;
   }
+
 }
 
 .navtab {
@@ -38,6 +40,9 @@ a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @media screen and (max-width: 645px){
+    display: none!important;
+  }
 }
 
 .searchBar {
@@ -101,6 +106,9 @@ a {
     @media screen and (max-width: 967px){
       grid-template-columns: repeat(2, 1fr);
     }
+    @media screen and (max-width: 512px){
+      grid-template-columns: repeat(1, 1fr);
+    }
   grid-gap: 2rem;
   padding: 1rem;
       li {
@@ -140,4 +148,8 @@ a {
 
 .btn-back {
   position: absolute;
+}
+
+.logo {
+  height: 32px;
 }
