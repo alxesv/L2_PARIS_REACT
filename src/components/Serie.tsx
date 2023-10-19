@@ -7,6 +7,8 @@ import { addFollow } from '../functions/addFollow'
 
 function Series(props : any){
 
+    const user = localStorage.getItem('userId');
+
     return(
         <div className="serie">
             <Link className="serieLink" to={"/serie/" + props.data.id}>
@@ -16,7 +18,7 @@ function Series(props : any){
             </Link>
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
         {
-            localStorage.getItem('userId') == user_id && props.data.id == serie_id ? (
+            user == user_id && props.data.id == serie_id ? (
                 <button className="followSerie" onClick={() => deleteFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faMinus}/></button>
             ) : (
                 <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faPlus}/></button>
