@@ -1,0 +1,25 @@
+[debug] [2023-10-19T08:54:32.520Z] ----------------------------------------------------------------------
+[debug] [2023-10-19T08:54:32.522Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2023-10-19T08:54:32.522Z] CLI Version:   12.7.0
+[debug] [2023-10-19T08:54:32.523Z] Platform:      darwin
+[debug] [2023-10-19T08:54:32.523Z] Node Version:  v18.17.1
+[debug] [2023-10-19T08:54:32.525Z] Time:          Thu Oct 19 2023 10:54:32 GMT+0200 (Central European Summer Time)
+[debug] [2023-10-19T08:54:32.526Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-10-19T08:54:32.601Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-10-19T08:54:32.601Z] > authorizing via signed-in user (theogiraudeau0@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/theo/Documents/GitHub/L2_PARIS_REACT
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+

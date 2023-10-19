@@ -21,18 +21,17 @@ function Register() {
   async function handleSubmit(e: any) {
     e.preventDefault();
 
-    // remove this comment to enable password check
-
+    // Supprimez ce commentaire pour activer la vérification du mot de passe
     /* const check = new RegExp(
       "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
     );
-    if(hasWhiteSpace(username)){
-      alert("Username must not contain any spaces");
+    if (hasWhiteSpace(username)) {
+      alert("Le nom d'utilisateur ne doit pas contenir d'espaces");
       return;
     }
     if (!check.test(password) || hasWhiteSpace(password)) {
       alert(
-        "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character and no spaces"
+        "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial, sans espaces"
       );
       return;
     } */
@@ -47,34 +46,39 @@ function Register() {
     setPassword("");
     navigate("/");
   }
-  
+
   async function register(db: any) {
     const hash = bcrypt.hashSync(password, salt);
     let exist = await getOneUser(firestore, email);
 
     if (exist.length > 0) {
-      alert("User already exist");
+      alert("L'utilisateur existe déjà");
       return false;
     }
     if (exist.length === 0) {
-      alert("User created");
+      alert("L'utilisateur a été créé");
     }
 
-    const { id } = await addDoc(collection(db, "users"), {
-      username: username,
-      mail: email,
-      password: hash,
-    });
+    try {
+      const { id } = await addDoc(collection(db, "users"), {
+        username: username,
+        mail: email,
+        password: hash,
+      });
 
-    localStorage.setItem("userId", id);
+      localStorage.setItem("userId", id);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout de l'utilisateur :", error);
+      // Gérez l'erreur ici
+    }
   }
 
   return (
     <div className="registerBody">
-      <h1>Register</h1>
+      <h1>Inscription</h1>
 
       <form onSubmit={(e) => handleSubmit(e)} className="form">
-        <label className="label">Username :</label>
+        <label className="label">Nom d'utilisateur :</label>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -84,7 +88,7 @@ function Register() {
           className="input"
         />
 
-        <label className="label">Email :</label>
+        <label className="label">E-mail :</label>
         <input
           type="email"
           name="email"
@@ -94,7 +98,7 @@ function Register() {
           className="input"
         />
 
-        <label className="label">Password :</label>
+        <label className="label">Mot de passe :</label>
         <input
           type="password"
           name="password"
@@ -105,7 +109,7 @@ function Register() {
         />
 
         <button type="submit" className="button-54">
-          Register
+          S'inscrire
         </button>
       </form>
     </div>
