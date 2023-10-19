@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { showfollows } from '../functions/showFollows';
+import Serie from '../components/Serie';
+import { useLocation } from 'react-router';
 
 function Follow() {
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
@@ -7,37 +9,43 @@ function Follow() {
 
   const user = localStorage.getItem('userId');
 
-  const [follows, setFollows] = useState<any>([]); // Initialise avec un tableau vide
+  const [follows, setFollows] = useState<any[]>([]); 
   const [series, setSeries] = useState<any[]>([]);
 
-  useEffect(() => {
-    // Utilisez une fonction asynchrone pour récupérer les données de follows
-    const fetchData = async () => {
-      const data = await showfollows(user);
-      setFollows(data); // Met à jour l'état lorsque la promesse est résolue
-    };
-
-    fetchData(); // Appel de la fonction fetchData
-  }, []); // Utilisez user comme dépendance pour réexécuter le useEffect si user change
-
-  useEffect(() => {
-    if (follows.length > 0) {
-      // Vous pouvez maintenant utiliser les données de follows pour effectuer votre requête API
-      const fetchSeries = async () => {
-        const res = await fetch(`${BASE_URL}/tv/84958/images?api_key=${TMDB_API_KEY}`);
+  const fetchSeriesForFollows = async () => {
+    const seriesData = await Promise.all(
+      follows.map(async (follow) => {
+        const res = await fetch(`${BASE_URL}/tv/${follow.serie_id }?api_key=${TMDB_API_KEY}`);
         const data = await res.json();
-        console.log("data : " + JSON.stringify(data.back))
-        setSeries(data.results);
-      };
+        return data; 
+      })
+    );
 
-      fetchSeries();
+    setSeries(seriesData);
+  };
+
+  const fetchData = async () => {
+    const data = await showfollows(user);
+    if (data === undefined) {
+      console.log("aucune data");
+    } else {
+      setFollows(data); 
     }
-  }, []); // Utilisez follows comme dépendance pour réexécuter le useEffect si follows change
+  };
 
+  useEffect(() => {
+    fetchData();
+  }, []); 
+
+  useEffect(()=>{
+    fetchSeriesForFollows();
+  }, [follows])
   return (
     <div className='container'>
-      <ul>
-        <li></li>
+      <ul className="serieList">
+        {series.map((serie, index) => (
+          <li key={index}><Serie data={serie} /></li>
+        ))}
       </ul>
     </div>
   );
