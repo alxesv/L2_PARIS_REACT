@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { faStar, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import '../assets/seriepage.scss';
@@ -62,7 +61,7 @@ function SeriePage(){
     return(
 
         <div className="container">
-        <button onClick={() => navigate(-1)} className="btn-back"><FontAwesomeIcon className="App-link" icon={faBackspace}/> Retour</button>
+        <button onClick={() => navigate(-1)} className="btn-back">Retour</button>
         <div className="backdrop" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${show.backdrop_path})`}}>
         <h1>{show.name}</h1>
         </div>
