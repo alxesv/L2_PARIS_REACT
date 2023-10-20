@@ -177,15 +177,44 @@ a {
   top: 0;
   left: 0;
   position: absolute;
-  font-size: 90%;
-  background: none;
+  font-size: 120%;
+  background-color: black;
+  opacity: 80%;
+  border-radius: 10%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  height: 7%;
+  width: 14%;
   border: none;
   cursor: pointer;
   color:white;
 }
 
-.followSerie:hover {
+.followSerieDelete {
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: 120%;
+  background-color: black;
+  opacity: 80%;
+  border-radius: 10%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  height: 7%;
+  width: 14%;
+  border: none;
+  cursor: pointer;
+  color:white;
+}
+
+.followSerieAdd:hover {
   color: #fbd461;
+}
+
+.followSerieDelete:hover {
+  color: red;
 }
 
 .btn-back {

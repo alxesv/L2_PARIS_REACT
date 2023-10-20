@@ -1,22 +1,28 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import '../assets/seriepage.scss';
 import { Link } from "react-router-dom";
 import Season from "../components/Season";
+import { addFollow  } from "../functions/addFollow";
+import { deleteFollow } from "../functions/deleteFollow";
+import { firestore } from "../App";
+import { inFollows } from "../functions/inFollows";
 
 function SeriePage(){
     const TMDB_API_KEY= process.env.REACT_APP_TMDB_API_KEY
     const BASE_URL = "https://api.themoviedb.org/3"
 
     let navigate = useNavigate();
+    const user = localStorage.getItem('userId');
     
     const [show, setShow] = useState<any>([])
     const [seasons, setSeasons] = useState<any[]>([])
+    const [isFollowed, setIsFollowed] = useState(false);
     let { serieId } = useParams();
 
     async function fetchShow(){
@@ -35,7 +41,15 @@ function SeriePage(){
         }
         setSeasons(seasonList);
     }
-        
+    
+    useEffect(() => {
+        if (user) {
+            inFollows(firestore, user, Number(serieId))
+                .then(result => {
+                    setIsFollowed(result);
+                });
+        }
+    }, [show])
 
     useEffect(() => {
         fetchShow()
@@ -69,6 +83,18 @@ function SeriePage(){
                         {show.genres && show.genres.map((genre : any) => {
                             return <Link to ={`/series/${genre.id}/1`} className="genre" key={genre.id}>{genre.name} </Link>
                         })}
+                    </div>
+                    <div>
+                        Suivre 
+                        {user ? (
+                            serieId ? (
+                                isFollowed ? (
+                                    <button className="followSerieDeleteDetail" onClick={() => { deleteFollow(firestore, user, Number(serieId)); setIsFollowed(false) }}><FontAwesomeIcon icon={faXmark}/></button>
+                                ) : (
+                                    <button className="followSerieAddDetail" onClick={() => { addFollow(firestore, Number(serieId)); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
+                                )
+                            ) :  undefined
+                        ) : null}   
                     </div>
                 </div>
                 <div className="seasons">

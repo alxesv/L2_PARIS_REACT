@@ -136,10 +136,10 @@ function SeriesPage() {
       console.log(error);
     }
   }, [currentPage, genre, sort, query]);
-
+  
   return (
     <div className="container">
-      <h1>Series</h1>
+      <h1>Séries</h1>
       <div className="seriesOptions">
         {query && <span className="infoList">Resultat pour : {query}</span>}
         <select
