@@ -1,5 +1,5 @@
 import { collection, doc, deleteDoc, getDocs, query, where } from 'firebase/firestore/lite';
-import { firestore } from '../App';
+import { toast } from "react-toastify";
 
 // Fonction pour supprimer un follow
 export async function deleteFollow(db: any, user_id: string, serie_id: number) {
@@ -11,11 +11,41 @@ export async function deleteFollow(db: any, user_id: string, serie_id: number) {
             const docId = querySnapshot.docs[0].id;
             const followRef = doc(collection(db, "follows"), docId);
             await deleteDoc(followRef);
+            toast.success("Suivie supprimé", {
+                position: "top-center",
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                autoClose: 2000,
+            });
             return true; 
         } else {
-            return false; 
+            toast.error("User doesn't exist", {
+                position: "top-center",
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                autoClose: 2000,
+            });
+            return false;
         }
     } catch (error) {
-        return false; 
+        toast.error("Problème de suppression", {
+            position: "top-center",
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            autoClose: 2000,
+        });
+        return false;
     }
 }

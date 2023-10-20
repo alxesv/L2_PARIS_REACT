@@ -10,6 +10,7 @@ import { deleteFollow } from "../functions/deleteFollow";
 function Series(props : any){
 
     const user = localStorage.getItem('userId');
+
     const [isFollowed, setIsFollowed] = useState(false);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ function Series(props : any){
                     setIsFollowed(result);
                 });
         }
-    }, [])
+    }, [props.data.id])
 
     return(
         <div className="serie">
@@ -31,11 +32,11 @@ function Series(props : any){
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
             {user ? (
                 isFollowed ? (
-                    <button className="followSerie" onClick={() => deleteFollow(firestore, user, props.data.id)}><FontAwesomeIcon icon={faMinus}/></button>
+                    <button className="followSerie" onClick={() => { deleteFollow(firestore, user, props.data.id); }}><FontAwesomeIcon icon={faMinus}/></button>
                 ) : (
-                    <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faPlus}/></button>
+                    <button className="followSerie" onClick={() => { addFollow(firestore, props.data.id); }}><FontAwesomeIcon icon={faPlus}/></button>
                 )
-            ) : null}
+            ) : null}   
         </div>
     )
 }
