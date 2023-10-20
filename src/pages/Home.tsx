@@ -4,7 +4,7 @@ function HomePage(){
     return(
         <div className='container'>
             <h1>
-            Hello world
+            Welcome to Popcorn Series
             </h1>
         </div>
     )
