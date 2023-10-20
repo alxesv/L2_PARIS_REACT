@@ -59,14 +59,14 @@ function NotifContainer(props : any){
             getEpisodes();
         }
     }
-    , [follows])
+    , [follows, user])
 
     useEffect(() => {
         if (notif.length > 0) {
-            props.stateChanger(true);
+            props.notifChanger(true);
         }
         else {
-            props.stateChanger(false);
+            props.notifChanger(false);
         }
     }
     , [notif])

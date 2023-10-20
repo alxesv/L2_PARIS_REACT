@@ -19,6 +19,7 @@ function Header(){
     const [user, setUser] = useState<any>({});
     const navigate = useNavigate();
     const [notif, setNotif] = useState(false);
+    const [allowNotif, setAllowNotif] = useState(false);
 
     function searchSerie(){
         const query = document.getElementById('serieSrch') as HTMLInputElement;
@@ -26,6 +27,11 @@ function Header(){
         if(endQuery !== '') {
         navigate('/series/search/' + endQuery + '/1');
         }
+    }
+
+    function handleLogout(){
+        logout();
+        setUser({});
     }
 
     useEffect(() => {
@@ -114,12 +120,12 @@ function Header(){
                     </div> ) : (
                     <div className='navtab'>
                         <button className={notif ? "notifOn btn-reset" : "btn-reset" } id="notifButton" onClick={showNotif}><FontAwesomeIcon icon={faBell}/></button>
-                        <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/login" onClick={logout}>Logout</Link>
+                        <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/login" onClick={handleLogout}>Logout</Link>
                     </div> 
                     )}
                 </div>
             </nav>
-            <NotifContainer currentUser={user} stateChanger={setNotif}/>
+            <NotifContainer currentUser={user} notifChanger={setNotif}/>
         </header>
     )
 }

@@ -31,7 +31,7 @@ export default function Login() {
 
     if (exist.user && bcrypt.compareSync(password, exist.user.password)) {
       localStorage.setItem("userId", exist.id);
-      navigate("/");
+      window.location.href = "/";
     }
 
     if (!exist.user) {
