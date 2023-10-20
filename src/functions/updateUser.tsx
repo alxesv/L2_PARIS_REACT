@@ -11,6 +11,7 @@ export default async function updateUser(data: any) {
   updateDoc(docRef, {
     username: data.username,
     mail: data.email,
+    notification: data.notification,
   });
   return true;
 }

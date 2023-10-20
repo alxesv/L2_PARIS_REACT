@@ -12,6 +12,7 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
   const [changePassword, setChangePassword] = useState<Boolean>();
+  const [notification, setNotification] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem("userId")) {
@@ -19,13 +20,14 @@ export default function Profile() {
         if (res.user) {
           setUsername(res.user.username);
           setEmail(res.user.mail);
+          setNotification(res.user.notification);
         }
       });
     }
   }, []);
 
   useEffect(() => {
-    if(changePassword) {
+    if (changePassword) {
       toast.success("Password updated", {
         position: "top-center",
         hideProgressBar: false,
@@ -45,6 +47,14 @@ export default function Profile() {
       db: firestore,
       userId: localStorage.getItem("userId"),
     });
+  }
+
+  function changeNotif() {
+    if (notification) {
+      setNotification(false);
+    } else {
+      setNotification(true);
+    }
   }
 
   async function handleSubmit(e: any) {
@@ -69,6 +79,7 @@ export default function Profile() {
       userId: localStorage.getItem("userId"),
       username: username,
       email: email,
+      notification: notification,
     });
 
     if (result === "user doesn't exist") {
@@ -119,6 +130,16 @@ export default function Profile() {
           onChange={(e) => setEmail(e.target.value)}
         />
 
+        <label className="profilLabel">Notification :</label>
+        <button
+          className="profilButtons"
+          type="button"
+          style={{ backgroundColor: notification ? "green" : "red" }}
+          onClick={() => changeNotif()}
+        >
+          Notification ?
+        </button>
+
         <button className="profilButtons" type="submit">
           Save
         </button>
@@ -132,7 +153,10 @@ export default function Profile() {
         </button>
       </form>
       {open ? (
-        <EditPassword closeEdit={() => setOpen(false)} changedPassword={() => setChangePassword(true)} />
+        <EditPassword
+          closeEdit={() => setOpen(false)}
+          changedPassword={() => setChangePassword(true)}
+        />
       ) : null}
     </div>
   );
