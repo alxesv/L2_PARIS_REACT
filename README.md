@@ -2,7 +2,7 @@
 
 ## Database 
 
-![Schema de la base de données](Schema_Base_de_donnees.png) 
+![Schema de la base de données](Schema_base_de_donnees.png) 
 #### Schema de la base de données
 
 
@@ -19,3 +19,9 @@ L'objectif de ce projet est de pouvoir fournir un accès complet à un utilisate
 ## Liens
 
 #### Trello : https://trello.com/invite/b/iuTq6qaO/ATTI49a930ebb1a766e79b4948e0541fa51dB38A174B/react-series
+
+## Groupe 
+### ScrumMaster : Alexandre Souvorov 
+#### Jean Fourest
+#### Theo Giraudeau
+#### Alexandre Devouard

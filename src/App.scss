@@ -9,6 +9,7 @@ a {
 
 .navbar, .tabs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   a {
     color: white;
@@ -21,6 +22,7 @@ a {
   >div:not(.tabs){
     display: flex;
   }
+
 }
 
 .navtab {
@@ -38,6 +40,9 @@ a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @media screen and (max-width: 645px){
+    display: none!important;
+  }
 }
 
 .searchBar {
@@ -69,7 +74,7 @@ a {
 .App-header {
   background-color: #1a1a18;
   min-height: 100vh;
-  font-size: calc(10px + 2vmin);
+  font-size: 1rem;
   color: white;
 }
 
@@ -84,6 +89,9 @@ a {
         margin: 0;
         display: inline-block;
       }
+      &:hover .ctr {
+        color: #fbd461;
+      }
 }
 
 .serieList {
@@ -97,6 +105,9 @@ a {
     }
     @media screen and (max-width: 967px){
       grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 512px){
+      grid-template-columns: repeat(1, 1fr);
     }
   grid-gap: 2rem;
   padding: 1rem;
@@ -133,4 +144,26 @@ a {
 
 .genreSelect, .sortSelect, .infoList {
   margin-left: 1rem;
+}
+
+.followSerie {
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: 90%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color:white;
+}
+
+.followSerie:hover {
+  color: #fbd461;
+  
+.btn-back {
+  position: absolute;
+}
+
+.logo {
+  height: 32px;
 }
