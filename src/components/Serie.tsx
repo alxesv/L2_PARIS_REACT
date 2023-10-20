@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { faStar, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore } from "../App";
@@ -10,7 +10,6 @@ import { deleteFollow } from "../functions/deleteFollow";
 function Series(props : any){
 
     const user = localStorage.getItem('userId');
-    const navigate = useNavigate();
 
     const [isFollowed, setIsFollowed] = useState(false);
 

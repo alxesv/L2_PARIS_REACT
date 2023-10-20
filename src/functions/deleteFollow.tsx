@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 
 // Fonction pour supprimer un follow
 export async function deleteFollow(db: any, user_id: string, serie_id: number) {
-
-
     try {
         const q = query(collection(db, "follows"), where("user_id", "==", user_id), where("serie_id", "==", serie_id));
         const querySnapshot = await getDocs(q);

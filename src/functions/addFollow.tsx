@@ -1,6 +1,7 @@
 import { addDoc, collection } from "firebase/firestore/lite";
 import { toast } from "react-toastify";
 
+
 export async function addFollow(db: any, id_serie: number) {
     try {
         let user = localStorage.getItem("userId");
