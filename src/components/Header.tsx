@@ -114,7 +114,7 @@ function Header(){
                     </div> ) : (
                     <div className='navtab'>
                         <button className={notif ? "notifOn btn-reset" : "btn-reset" } id="notifButton" onClick={showNotif}><FontAwesomeIcon icon={faBell}/></button>
-                        <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/series/1" onClick={logout}>Logout</Link>
+                        <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/login" onClick={logout}>Logout</Link>
                     </div> 
                     )}
                 </div>
