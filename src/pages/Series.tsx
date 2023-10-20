@@ -175,8 +175,8 @@ function SeriesPage() {
       {!series || totalPages < currentPage ? (
         <>
           <div>Aucun résultat</div>
-          <button onClick={() => navigate(-1)}>
-            <FontAwesomeIcon className="App-link" icon={faBackspace} /> Retour
+          <button onClick={() => navigate(-1)} className="btn-back" >
+            Retour
           </button>
         </>
       ) : (
