@@ -72,11 +72,9 @@ function Header(){
             <nav className='navbar'>
                 <div className='logo'>
                     <img src={logo} alt="logo" />
+                    <span>Popcorn Series</span>
                 </div>
                 <div className='tabs'>
-                    <div className='navtab'>
-                        <Link className={active === '' ? 'active' : ''} to="/">Accueil</Link>
-                    </div>
                     <div className='navtab'>
                         <Link className={(active === 'series' || active === 'serie') ? 'active' : ''} to="/series/1">Séries</Link>
                     </div>
