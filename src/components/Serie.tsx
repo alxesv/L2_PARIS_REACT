@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faStar, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore } from "../App";
@@ -10,6 +10,7 @@ import { deleteFollow } from "../functions/deleteFollow";
 function Series(props : any){
 
     const user = localStorage.getItem('userId');
+    const navigate = useNavigate();
 
     const [isFollowed, setIsFollowed] = useState(false);
 
@@ -22,6 +23,12 @@ function Series(props : any){
         }
     }, [props.data.id])
 
+    const reloadPage = () => {
+        if (window.location.pathname === '/followed') {
+            window.location.reload();
+        }
+    }
+
     return(
         <div className="serie">
             <Link className="serieLink" to={"/serie/" + props.data.id}>
@@ -32,9 +39,9 @@ function Series(props : any){
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
             {user ? (
                 isFollowed ? (
-                    <button className="followSerieDelete" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false) }}><FontAwesomeIcon icon={faXmark}/></button>
+                    <button className="followSerieDelete" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false); reloadPage() }}><FontAwesomeIcon icon={faXmark}/></button>
                 ) : (
-                    <button className="followSerieAdd" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
+                    <button className="followSerieAdd" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true); reloadPage() }}><FontAwesomeIcon icon={faPlus}/></button>
                 )
             ) : null}   
         </div>

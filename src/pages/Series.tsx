@@ -134,7 +134,7 @@ function SeriesPage(){
 
     return(
         <div className='container'>
-            <h1>Series</h1>
+            <h1>Séries</h1>
             {query && <span className='infoList'>Resultat pour : {query}</span>}
             <select className='genreSelect' onChange={(e) => gotoGenre(e.target.value)}>
             <option value="">Tous les genres</option>
