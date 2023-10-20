@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { faStar, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore } from "../App";
 import { addFollow } from '../functions/addFollow'
@@ -32,9 +32,9 @@ function Series(props : any){
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
             {user ? (
                 isFollowed ? (
-                    <button className="followSerie" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false) }}><FontAwesomeIcon icon={faMinus}/></button>
+                    <button className="followSerieDelete" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false) }}><FontAwesomeIcon icon={faXmark}/></button>
                 ) : (
-                    <button className="followSerie" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
+                    <button className="followSerieAdd" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
                 )
             ) : null}   
         </div>
