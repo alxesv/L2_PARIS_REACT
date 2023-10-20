@@ -35,7 +35,7 @@ function Series(props : any){
                 ) : (
                     <button className="followSerie" onClick={() => addFollow(firestore, props.data.id)}><FontAwesomeIcon icon={faPlus}/></button>
                 )
-            ) : null}
+            ) : null}   
         </div>
     )
 }
