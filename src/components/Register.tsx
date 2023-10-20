@@ -100,7 +100,7 @@ function Register() {
   }
 
   return (
-    <div className="registerBody">
+    <div className="registerBody container">
       <ToastContainer />
       <h1>Register</h1>
 

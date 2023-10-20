@@ -23,6 +23,8 @@
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
     5px 5px 0px 0px;
   border-radius: 5px;
+  height: 30px;
+  font-size: 1em;
 }
 
 .registerInput:focus {
@@ -31,6 +33,7 @@
 
 .registerLabel {
   margin-top: 5%;
+  font-size: 1.2em;
 }
 .registerButtons {
   margin-top: 5%;

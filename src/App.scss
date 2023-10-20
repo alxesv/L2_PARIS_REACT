@@ -1,3 +1,7 @@
+body {
+  background-color: #1a1a18;
+}
+
 .btn-reset {
   all: unset;
 }
@@ -65,7 +69,7 @@ a {
 }
 .container {
   padding: 3rem;
-  padding-top: 0;
+  padding-top: 4%;
   h1 {
     text-align: center;
   }
@@ -142,23 +146,83 @@ a {
   font-size: 1.5rem;
 }
 
-.genreSelect, .sortSelect, .infoList {
+.genreSelect, .sortSelect {
   margin-left: 1rem;
 }
 
-.followSerie {
+.genreSelect {
+  box-shadow: 1px 1px 0px 0px rgb(88, 88, 88), 2px 2px 0px 0px rgb(88, 88, 88), 3px 3px 0px 0px rgb(88, 88, 88), 4px 4px 0px 0px rgb(88, 88, 88),
+    5px 5px 0px 0px rgb(88, 88, 88);
+  margin-left: 0px;
+}
+
+.seriesOptions {
+  display: flex;
+  background-color: rgb(61, 61, 61);
+  height: fit-content;
+  width: auto;
+  padding: 1% 1%;
+  border-radius: 5px;
+
+  .infoList {
+    margin-right: 1%;
+  }
+
+  select{
+    box-shadow: black 1px 1px 0px 0px, black 2px 2px 0px 0px,
+    black 3px 3px 0px 0px, black 4px 4px 0px 0px, black 5px 5px 0px 0px;
+    border-radius: 2px;
+    height: fit-content;
+    width: fit-content;
+  }
+}
+
+.followSerieAdd {
   top: 0;
   left: 0;
   position: absolute;
-  font-size: 90%;
-  background: none;
+  font-size: 120%;
+  background-color: black;
+  opacity: 80%;
+  border-radius: 10%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  height: 7%;
+  width: 14%;
   border: none;
   cursor: pointer;
   color:white;
 }
 
-.followSerie:hover {
+.followSerieDelete {
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: 120%;
+  background-color: black;
+  opacity: 80%;
+  border-radius: 10%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  height: 7%;
+  width: 14%;
+  border: none;
+  cursor: pointer;
+  color:white;
+}
+
+.followSerieAdd:hover {
   color: #fbd461;
+}
+
+.followSerieDelete:hover {
+  color: red;
+}
+
+.btn-back {
+  position: absolute;
 }
 
 .logo {
@@ -186,3 +250,13 @@ a {
 .hidden {
   display: none;
 }
+
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 10;
+  background-color: #1a1a18;
+}
+

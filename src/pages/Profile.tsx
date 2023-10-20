@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getOneUser } from "../functions/getOneUser";
 import { firestore } from "../App";
 import "../assets/profile.scss";
-import EditPassword from "./EditPassword";
+import EditPassword from "../components/EditPassword";
 import updateUser from "../functions/updateUser";
 import { ToastContainer, toast } from "react-toastify";
 import { hasWhiteSpace } from "../functions/hasWhiteSpace";
@@ -119,55 +119,58 @@ export default function Profile() {
   }
 
   return (
-    <div className="profilBody">
-      <ToastContainer />
-      <form className="profilForm" onSubmit={(e) => handleSubmit(e)}>
-        <label className="profilLabel">Username :</label>
-        <input
-          className="profilInput"
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="container">
+      <h1>Profil</h1>
+      <div className="profilBody">
+        <ToastContainer />
+        <form className="profilForm" onSubmit={(e) => handleSubmit(e)}>
+          <label className="profilLabel">Username :</label>
+          <input
+            className="profilInput"
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-        <label className="profilLabel">Email :</label>
-        <input
-          className="profilInput"
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <label className="profilLabel">Email :</label>
+          <input
+            className="profilInput"
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <label className="profilLabel">Notification :</label>
-        <button
-          className="profilButtons"
-          type="button"
-          style={{ backgroundColor: notification ? "green" : "red" }}
-          onClick={() => changeNotif()}
-        >
-          Notification ?
-        </button>
+          <label className="profilLabel">Notification :</label>
+          <button
+            className="profilButtons"
+            type="button"
+            style={{ backgroundColor: notification ? "green" : "red" }}
+            onClick={() => changeNotif()}
+          >
+            Notification ?
+          </button>
 
-        <button className="profilButtons" type="submit">
-          Save
-        </button>
+          <button className="profilButtons" type="submit">
+            Save
+          </button>
 
-        <button
-          className="profilButtons"
-          type="button"
-          onClick={() => setOpen(true)}
-        >
-          Edit password
-        </button>
-      </form>
-      {open ? (
-        <EditPassword
-          closeEdit={() => setOpen(false)}
-          changedPassword={() => setChangePassword(true)}
-        />
-      ) : null}
+          <button
+            className="profilButtons"
+            type="button"
+            onClick={() => setOpen(true)}
+          >
+            Edit password
+          </button>
+        </form>
+        {open ? (
+          <EditPassword
+            closeEdit={() => setOpen(false)}
+            changedPassword={() => setChangePassword(true)}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
