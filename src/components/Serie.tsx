@@ -6,13 +6,24 @@ import { firestore } from "../App";
 import { addFollow } from '../functions/addFollow'
 import { inFollows } from '../functions/inFollows'
 import { deleteFollow } from "../functions/deleteFollow";
+import { useLocation } from "react-router-dom";
 
 function Series(props : any){
 
     const user = localStorage.getItem('userId');
-    const navigate = useNavigate();
+    const location = useLocation();
+    const page = location.pathname.split('/')[1];
 
     const [isFollowed, setIsFollowed] = useState(false);
+
+    function removeFromFollow(id : any){
+        if(page === "followed"){
+            let newfollowList = props.follows.filter((follow : any) => follow.serie_id !== id)
+            props.stateChanger(newfollowList)
+        } else{
+            return;
+        }
+    }
 
     useEffect(() => {
         if (user) {
@@ -22,12 +33,6 @@ function Series(props : any){
                 });
         }
     }, [props.data.id])
-
-    const reloadPage = () => {
-        if (window.location.pathname === '/followed') {
-            window.location.reload();
-        }
-    }
 
     return(
         <div className="serie">
@@ -39,9 +44,9 @@ function Series(props : any){
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
             {user ? (
                 isFollowed ? (
-                    <button className="followSerieDelete" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false); reloadPage() }}><FontAwesomeIcon icon={faXmark}/></button>
+                    <button className="followSerieDelete" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false); removeFromFollow(props.data.id)}}><FontAwesomeIcon icon={faXmark}/></button>
                 ) : (
-                    <button className="followSerieAdd" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true); reloadPage() }}><FontAwesomeIcon icon={faPlus}/></button>
+                    <button className="followSerieAdd" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true);}}><FontAwesomeIcon icon={faPlus}/></button>
                 )
             ) : null}   
         </div>

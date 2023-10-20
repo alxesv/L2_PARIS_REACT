@@ -49,7 +49,7 @@ function FollowPage(){
             <div className='container'>
                 <ul className="serieList">
                     {series.map((serie, index) => (
-                    <li key={index}><Serie data={serie} /></li>
+                        <li key={index}><Serie data={serie} stateChanger={setFollows} follows={follows}/></li>
                     ))}
                 </ul>
             </div>
