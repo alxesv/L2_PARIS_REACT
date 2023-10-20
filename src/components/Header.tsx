@@ -93,7 +93,7 @@ function Header(){
                 </div>
                 <div className='tabs'>
                     <div className='navtab'>
-                        <Link className={(active === 'series' || active === 'serie') ? 'active' : ''} to="/series/1">Séries</Link>
+                        <Link className={(active === 'series' || active === 'serie' || active === "") ? 'active' : ''} to="/series/1">Séries</Link>
                     </div>
                     <div className='navtab'>
                         <Link className={active === 'followed' ? 'active' : ''} to="/followed">Suivies</Link>
