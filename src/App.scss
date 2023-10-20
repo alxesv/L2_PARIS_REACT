@@ -170,9 +170,14 @@ a {
 
 
 #notifButton {
+  &.notifOn {
+    color: red;
+  }
+
   &:hover{
       color: #fbd461;
   }
+  
   &.active{
       color: #fbd461;
   }

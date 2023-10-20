@@ -18,6 +18,7 @@ function Header(){
     const [active, setActive] = useState(page);
     const [user, setUser] = useState<any>({});
     const navigate = useNavigate();
+    const [notif, setNotif] = useState(false);
 
     function searchSerie(){
         const query = document.getElementById('serieSrch') as HTMLInputElement;
@@ -45,6 +46,7 @@ function Header(){
                     });
                     navigate('/')
                 } else {
+                    res.user['id'] = localStorage.getItem('userId');
                     setUser(res.user)
                 }
             })
@@ -111,13 +113,13 @@ function Header(){
                         <Link className={active === 'login' ? 'active' : ''} to="/login">Login</Link>
                     </div> ) : (
                     <div className='navtab'>
-                        <button className='btn-reset' id="notifButton" onClick={showNotif}><FontAwesomeIcon icon={faBell}/></button>
+                        <button className={notif ? "notifOn btn-reset" : "btn-reset" } id="notifButton" onClick={showNotif}><FontAwesomeIcon icon={faBell}/></button>
                         <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/series/1" onClick={logout}>Logout</Link>
                     </div> 
                     )}
                 </div>
             </nav>
-            <NotifContainer currentUser={user} />
+            <NotifContainer currentUser={user} stateChanger={setNotif}/>
         </header>
     )
 }
