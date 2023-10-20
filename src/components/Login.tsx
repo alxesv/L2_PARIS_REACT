@@ -27,24 +27,11 @@ export default function Login() {
   }
 
   async function login(firestore: any) {
-    let exist = await getOneUser(firestore, email);
+    let exist = await getOneUser({ db: firestore, email: email });
 
     if (exist.user && bcrypt.compareSync(password, exist.user.password)) {
-      toast.success("Login successful !", {
-        position: "top-center",
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        autoClose: 3000,
-      });
-
       localStorage.setItem("userId", exist.id);
-      setTimeout(() => {
-        navigate("/");
-      }, 4000);
+      navigate("/");
     }
 
     if (!exist.user) {
@@ -100,11 +87,11 @@ export default function Login() {
           className="loginInput"
         />
 
-        <button type="submit" className="button-53 loginButton">
+        <button type="submit" className="loginButtons loginButton">
           Login
         </button>
 
-        <Link className="button-53" to="/register">
+        <Link className="loginButtons" to="/register">
           Register ?
         </Link>
       </form>
