@@ -8,6 +8,8 @@ import logout from '../functions/logout';
 import { useNavigate } from 'react-router-dom';
 import { getOneUser } from '../functions/getOneUser';
 import { firestore } from '../App';
+import { ToastContainer, toast } from "react-toastify";
+
 
 function Header(){
     const location = useLocation();
@@ -30,6 +32,16 @@ function Header(){
             getOneUser({db: firestore, userId: localStorage.getItem('userId')}).then((res) => {
                 if(!res.user){
                     localStorage.removeItem('userId')
+                    toast.error("User doesn't exist", {
+                        position: "top-center",
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        autoClose: 3000,
+                    });
                     navigate('/')
                 } else {
                     setUser(res.user)
@@ -38,6 +50,16 @@ function Header(){
         } else {
             setUser({});
             if(page === 'profile' || page === 'followed' || page === 'calendar'){
+                toast.error("You must be logged in to access this page", {
+                    position: "top-center",
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    autoClose: 3000,
+                });
                 navigate('/');
             }
         }
@@ -46,6 +68,7 @@ function Header(){
 
     return(
         <header>
+            <ToastContainer />
             <nav className='navbar'>
                 <div className='logo'>placeholder</div>
                 <div className='tabs'>
