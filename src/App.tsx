@@ -6,7 +6,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 import { initializeApp } from "firebase/app";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import UserPage from "./pages/User";
+import Profile from "./pages/Profile";
 import CalendarPage from "./pages/Calendar";
 import SeriesPage from "./pages/Series";
 import SeriePage from "./pages/Serie";
@@ -56,7 +56,7 @@ function App() {
         <Route path="series/search/:genre/:query/:page" element={<SeriesPage />} />
         <Route path="/serie/:serieId" element={<SeriePage />} />
         <Route path="/followed" element={<FollowPage />} />
-        <Route path="/profile" element={<UserPage />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/calendar" element={<CalendarPage />} />
 
       </Routes>

@@ -142,11 +142,38 @@ a {
   font-size: 1.5rem;
 }
 
-.genreSelect, .sortSelect, .infoList {
+.genreSelect, .sortSelect {
   margin-left: 1rem;
 }
 
-.followSerieAdd {
+.genreSelect {
+  box-shadow: 1px 1px 0px 0px rgb(88, 88, 88), 2px 2px 0px 0px rgb(88, 88, 88), 3px 3px 0px 0px rgb(88, 88, 88), 4px 4px 0px 0px rgb(88, 88, 88),
+    5px 5px 0px 0px rgb(88, 88, 88);
+  margin-left: 0px;
+}
+
+.seriesOptions {
+  display: flex;
+  background-color: rgb(61, 61, 61);
+  height: fit-content;
+  width: auto;
+  padding: 1% 1%;
+  border-radius: 5px;
+
+  .infoList {
+    margin-right: 1%;
+  }
+
+  select{
+    box-shadow: black 1px 1px 0px 0px, black 2px 2px 0px 0px,
+    black 3px 3px 0px 0px, black 4px 4px 0px 0px, black 5px 5px 0px 0px;
+    border-radius: 2px;
+    height: fit-content;
+    width: fit-content;
+  }
+}
+
+.followSerie {
   top: 0;
   left: 0;
   position: absolute;

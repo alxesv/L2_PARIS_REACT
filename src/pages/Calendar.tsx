@@ -4,6 +4,7 @@ import { firestore } from "../App";
 import { collection, query, where, getDocs } from 'firebase/firestore/lite';
 import CalendarItem from '../components/CalendarItem';
 import { getUserId } from '../functions/getUserId';
+import Day from '../components/Day';
 
 
 function CalendarPage(){
@@ -11,7 +12,7 @@ function CalendarPage(){
     const BASE_URL = 'https://api.themoviedb.org/3';
 
     const user_id  : any = getUserId();
-
+    const days : string[] = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
     let followList : string[] = [];
     const [episodes, setEpisodes] = useState<any[]>([]);
@@ -22,13 +23,10 @@ function CalendarPage(){
 
     function getDate(day : number, currentDay : number, currentDate : Date) {
         let date = new Date(currentDate);
-        if(day === 0){
-            day = 7;
-        }
         if(day < currentDay){
-            date.setDate(date.getDate() - (currentDay - day));
+            date.setDate(date.getDate() - (currentDay - day) + 1);
         }else{
-            date.setDate(date.getDate() + (day - currentDay));
+            date.setDate(date.getDate() + (day - currentDay) + 1);
         }
         let dateFormat = date.toLocaleDateString('fr-FR', {day: 'numeric', month: 'numeric'});
         return dateFormat;
@@ -47,7 +45,6 @@ function CalendarPage(){
         for (let i = 0; i < followList.length; i++) {
             const res = await fetch(`${BASE_URL}/tv/${followList[i]}?api_key=${TMDB_API_KEY}&language=fr-FR`);
             const data = await res.json();
-            console.log(data);
             if(data.next_episode_to_air !== null){
                 const nextEpisode = data.next_episode_to_air;
                 const nextEpisodeDate = new Date(nextEpisode.air_date);
@@ -103,118 +100,11 @@ function CalendarPage(){
             Calendar Page
             </h1>
             <div className="calendar">
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 1 ? "today" : ""}>Lundi</span>
-                    <span>{getDate(1, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                        {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 1){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 2 ? "today" : ""}>Mardi</span>
-                    <span>{getDate(2, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                    {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 2){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 3 ? "today" : ""}>Mercredi</span>
-                    <span>{getDate(3, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                    {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 3){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 4 ? "today" : ""}>Jeudi</span>
-                    <span>{getDate(4, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                    {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 4){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 5 ? "today" : ""}>Vendredi</span>
-                    <span>{getDate(5, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                    {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 5){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 6 ? "today" : ""}>Samedi</span>
-                    <span>{getDate(6, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                    {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 6){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
-                <div className='day'>
-                    <div className='dayName'><span className={currentDay === 0 ? "today" : ""}>Dimanche</span>
-                    <span>{getDate(0, currentDay, currentDate)}</span>
-                    </div>
-                    <div className='dayContent'>
-                    {episodes.map((episode, index) => {
-                            const date = new Date(episode.air_date);
-                            if(date.getDay() === 0){
-                                return(
-                                    <CalendarItem key={index} data={episode}/>
-                                )
-                            }
-                        }
-                        )}
-                    </div>
-                </div>
+                {days.map((day, index) => {
+                    return(
+                        <Day dayname={day} currentDay={currentDay} currentDate={currentDate} episodes={episodes} key={index} dayNb={index+1} date={getDate(index, currentDay, currentDate)}/>
+                    )
+                })}
             </div>
         </div>
     )
