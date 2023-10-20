@@ -62,7 +62,7 @@ export default function Login() {
   }
 
   return (
-    <div className="loginBody">
+    <div className="loginBody container">
       <ToastContainer />
       <h1>Login</h1>
 
