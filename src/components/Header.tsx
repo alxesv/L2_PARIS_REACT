@@ -6,11 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import logout from '../functions/logout';
 import { useNavigate } from 'react-router-dom';
+import { getOneUser } from '../functions/getOneUser';
+import { firestore } from '../App';
 
 function Header(){
     const location = useLocation();
     const page = location.pathname.split('/')[1];
     const [active, setActive] = useState(page);
+    const [user, setUser] = useState<any>({});
     const navigate = useNavigate();
 
     function searchSerie(){
@@ -23,6 +26,21 @@ function Header(){
 
     useEffect(() => {
         setActive(page)
+        if(localStorage.getItem('userId')){
+            getOneUser({db: firestore, userId: localStorage.getItem('userId')}).then((res) => {
+                if(!res.user){
+                    localStorage.removeItem('userId')
+                    navigate('/')
+                } else {
+                    setUser(res.user)
+                }
+            })
+        } else {
+            setUser({});
+            if(page === 'profile' || page === 'followed' || page === 'calendar'){
+                navigate('/');
+            }
+        }
     }
     , [page])
 
@@ -54,14 +72,16 @@ function Header(){
                     </button>
                 </div>
                 <div className='userZone'>
-                    {!localStorage.getItem("userId") ? <div className='navtab'>
+                    {!user.username ? (
+                    <div className='navtab'>
                         <Link className={active === 'register' ? 'active' : ''} to="/register">Register</Link>
                         |
                         <Link className={active === 'login' ? 'active' : ''} to="/login">Login</Link>
-                    </div> : 
+                    </div> ) : (
                     <div className='navtab'>
                         <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/" onClick={logout}>Logout</Link>
-                    </div> }
+                    </div> 
+                    )}
                 </div>
             </nav>
         </header>

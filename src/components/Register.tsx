@@ -68,25 +68,12 @@ function Register() {
     setEmail("");
     setPassword("");
 
-    toast.success("User created !", {
-      position: "top-center",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      autoClose: 3000,
-    });
-
-    setTimeout(() => {
-      navigate("/");
-    }, 4000);
+    navigate("/");
   }
 
   async function register(db: any) {
     const hash = bcrypt.hashSync(password, salt);
-    let exist = await getOneUser(firestore, email);
+    let exist = await getOneUser({ db: firestore, email: email });
 
     if (exist.user) {
       toast.error("User already exist", {
@@ -147,11 +134,11 @@ function Register() {
           className="registerInput"
         />
 
-        <button type="submit" className="button-54 registerButton">
+        <button type="submit" className="registerButtons registerButton">
           Register
         </button>
 
-        <Link className="button-54" to="/login">
+        <Link className="registerButtons" to="/login">
           login ?
         </Link>
       </form>
