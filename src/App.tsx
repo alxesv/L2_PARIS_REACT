@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.scss";
 import handleSubmit from "./handles/handlesubmit";
 import { useRef } from "react";
@@ -7,7 +6,6 @@ import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 import { initializeApp } from "firebase/app";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import HomePage from "./pages/Home";
 import UserPage from "./pages/User";
 import CalendarPage from "./pages/Calendar";
 import SeriesPage from "./pages/Series";
@@ -48,8 +46,8 @@ function App() {
     <div className="App-header">
       <Header />
       <Routes>
-        <Route path="*" element={<HomePage />} />
-        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<SeriesPage />} />
+        <Route path="/" element={<SeriesPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/series/:page" element={<SeriesPage />} />
