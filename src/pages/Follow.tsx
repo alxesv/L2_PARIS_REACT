@@ -27,9 +27,9 @@ function FollowPage(){
     const fetchData = async () => {
         const data = await showfollows(user);
         if (data === undefined) {
-        console.log("aucune data");
+            console.log("aucune data");
         } else {
-        setFollows(data); 
+            setFollows(data); 
         }
     };
 
