@@ -32,9 +32,9 @@ function Series(props : any){
             <span className="rating">{props.data.vote_average} <FontAwesomeIcon color="yellow" icon={faStar}/></span>
             {user ? (
                 isFollowed ? (
-                    <button className="followSerie" onClick={() => { deleteFollow(firestore, user, props.data.id); }}><FontAwesomeIcon icon={faMinus}/></button>
+                    <button className="followSerie" onClick={() => { deleteFollow(firestore, user, props.data.id); setIsFollowed(false) }}><FontAwesomeIcon icon={faMinus}/></button>
                 ) : (
-                    <button className="followSerie" onClick={() => { addFollow(firestore, props.data.id); }}><FontAwesomeIcon icon={faPlus}/></button>
+                    <button className="followSerie" onClick={() => { addFollow(firestore, props.data.id); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
                 )
             ) : null}   
         </div>
