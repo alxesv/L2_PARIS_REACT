@@ -57,7 +57,6 @@ function App() {
         <Route path="/series/search/:query/:page" element={<SeriesPage />} />
         <Route path="series/search/:genre/:query/:page" element={<SeriesPage />} />
         <Route path="/serie/:serieId" element={<SeriePage />} />
-
         <Route path="/followed" element={<FollowPage />} />
         <Route path="/profile" element={<UserPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
