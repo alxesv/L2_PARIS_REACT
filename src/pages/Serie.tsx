@@ -86,15 +86,15 @@ function SeriePage(){
                     </div>
                     <div>
                         Suivre 
-                    {user ? (
-                        serieId ? (
-                            isFollowed ? (
-                                <button className="followSerieDeleteDetail" onClick={() => { deleteFollow(firestore, user, Number(serieId)); setIsFollowed(false) }}><FontAwesomeIcon icon={faXmark}/></button>
-                            ) : (
-                                <button className="followSerieAddDetail" onClick={() => { addFollow(firestore, Number(serieId)); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
-                            )
-                        ) :  undefined
-                    ) : null}   
+                        {user ? (
+                            serieId ? (
+                                isFollowed ? (
+                                    <button className="followSerieDeleteDetail" onClick={() => { deleteFollow(firestore, user, Number(serieId)); setIsFollowed(false) }}><FontAwesomeIcon icon={faXmark}/></button>
+                                ) : (
+                                    <button className="followSerieAddDetail" onClick={() => { addFollow(firestore, Number(serieId)); setIsFollowed(true) }}><FontAwesomeIcon icon={faPlus}/></button>
+                                )
+                            ) :  undefined
+                        ) : null}   
                     </div>
                 </div>
                 <div className="seasons">
