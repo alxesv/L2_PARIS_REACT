@@ -1,0 +1,43 @@
+.notifContainer {
+    width: 30vw;
+    height: 100vh;
+    background-color: #292721;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transition: transform .3s
+                cubic-bezier(1, .52, 0, 1);
+    overflow: scroll;
+    z-index: 1000;
+    button{
+        margin-left: 0.5rem;
+        font-size: 2rem;
+        &:hover{
+            color: red;
+        }
+    }
+    ul{
+        height: 90%;
+        overflow-y:scroll;
+        overflow-x:hidden;
+        display: flex;
+        flex-direction: column;
+        margin: 0 3rem;
+        li {
+            margin-top: 1rem;
+        }
+    }
+  }
+  li {
+    list-style: none;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+.hide {
+    transform: translate3d(100vw, 0, 0);
+}
+
+.visible {
+    transform: translate3d(0vw, 0, 0);
+    overflow: hidden;
+}

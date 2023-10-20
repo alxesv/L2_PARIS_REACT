@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function CalendarItem(props : any){
-
     return(
         <div className="serie">
         <Link className="serieLink" to={"/serie/" + props.data.serie_id}>

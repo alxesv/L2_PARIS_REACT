@@ -232,6 +232,25 @@ a {
   }
 }
 
+
+#notifButton {
+  &.notifOn {
+    color: red;
+  }
+
+  &:hover{
+      color: #fbd461;
+  }
+  
+  &.active{
+      color: #fbd461;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
 header {
   position: fixed;
   top: 0px;
@@ -240,3 +259,4 @@ header {
   z-index: 10;
   background-color: #1a1a18;
 }
+
