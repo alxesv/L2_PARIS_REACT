@@ -80,7 +80,17 @@ export default function Profile() {
       username: username,
       email: email,
       notification: notification,
-    });
+    }).then((res) => {
+      return res;
+      });
+
+    if(!notification){
+      document.getElementById("notifButton")?.classList.toggle("hidden");
+    }else{
+      document.getElementById("notifButton")?.classList.remove("hidden");
+    }
+
+
 
     if (result === "user doesn't exist") {
       toast.error("User doesn't exist", {

@@ -161,13 +161,23 @@ a {
   color: #fbd461;
 }
 
-.btn-back {
-  position: absolute;
-}
-
 .logo {
   height: 32px;
   span {
     align-self: center;
   }
+}
+
+
+#notifButton {
+  &:hover{
+      color: #fbd461;
+  }
+  &.active{
+      color: #fbd461;
+  }
+}
+
+.hidden {
+  display: none;
 }

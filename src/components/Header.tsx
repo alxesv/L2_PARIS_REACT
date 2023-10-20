@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBell } from '@fortawesome/free-solid-svg-icons';
 import logout from '../functions/logout';
 import { useNavigate } from 'react-router-dom';
 import { getOneUser } from '../functions/getOneUser';
 import { firestore } from '../App';
 import { ToastContainer, toast } from "react-toastify";
 import logo from '../ressources/logo.png';
+import NotifContainer from './NotifContainer';
 
 function Header(){
     const location = useLocation();
@@ -49,7 +50,7 @@ function Header(){
             })
         } else {
             setUser({});
-            if(page === 'profile' || page === 'followed' || page === 'calendar'){
+            if(page === 'profile' || page === 'followed' || page === 'calendar' || page === 'notifications'){
                 toast.error("You must be logged in to access this page", {
                     position: "top-center",
                     hideProgressBar: false,
@@ -65,6 +66,14 @@ function Header(){
         }
     }
     , [page])
+
+    function showNotif(){
+        const notifContainer = document.querySelector('.notifContainer') as HTMLDivElement;
+        notifContainer.classList.toggle('visible');
+        notifContainer.classList.toggle('hide');
+        const notifButton = document.getElementById('notifButton') as HTMLButtonElement;
+        notifButton.classList.toggle('active');
+    }
 
     return(
         <header>
@@ -102,11 +111,13 @@ function Header(){
                         <Link className={active === 'login' ? 'active' : ''} to="/login">Login</Link>
                     </div> ) : (
                     <div className='navtab'>
-                        <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/" onClick={logout}>Logout</Link>
+                        <button className='btn-reset' id="notifButton" onClick={showNotif}><FontAwesomeIcon icon={faBell}/></button>
+                        <Link className={(active === 'logout' || active === 'logout') ? 'active' : ''} to="/series/1" onClick={logout}>Logout</Link>
                     </div> 
                     )}
                 </div>
             </nav>
+            <NotifContainer currentUser={user} />
         </header>
     )
 }

@@ -1,0 +1,28 @@
+.notifContainer {
+    width: 30vw;
+    height: 100vh;
+    background-color: #292721;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transition: transform .3s
+                cubic-bezier(1, .52, 0, 1);
+    overflow: scroll;
+    z-index: 1000;
+    padding: 2rem;
+    button{
+        font-size: 2rem;
+        &:hover{
+            color: red;
+        }
+    }
+  }
+   
+.hide {
+    transform: translate3d(100vw, 0, 0);
+}
+
+.visible {
+    transform: translate3d(0vw, 0, 0);
+    overflow: hidden;
+}
