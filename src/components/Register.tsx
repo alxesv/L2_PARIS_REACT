@@ -93,6 +93,7 @@ function Register() {
       username: username,
       mail: email,
       password: hash,
+      notification: false
     });
 
     localStorage.setItem("userId", id);
