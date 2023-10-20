@@ -15,6 +15,8 @@ import SeriePage from "./pages/Serie";
 import Register from "./components/Register";
 import FollowPage from "./pages/Follow";
 import Login from "./components/Login";
+import Comment from "./components/Comment";
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
