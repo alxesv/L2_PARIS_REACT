@@ -60,7 +60,7 @@ function Header(){
                     theme: "dark",
                     autoClose: 3000,
                 });
-                navigate('/');
+                navigate('/login');
             }
         }
     }
